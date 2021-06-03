@@ -11,6 +11,8 @@ CORS(app)
 
 hostname = socket.gethostname()
 
+redis_topic = "vote-channel"
+
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -31,15 +33,17 @@ def get_redis():
 
 @app.route("/vote", methods=['POST', 'GET'])
 def add_vote():
-    print(".......Add Vote........")
+    print(".......Add Vote to Redis Topic........")
     if request.method == 'POST':
         rsdb = get_redis()
+        rsdb.pubsub()
         data = json.dumps(request.get_json())
-        rsdb.rpush('votes', data)
+        rsdb.publish(redis_topic, data)
+        print(redis_topic)
+        print(data)
         return data
 
 
 if __name__ == '__main__':
     # app.run(host='0.0.0.0', port=5000, debug=True, threaded=True)
     app.run(host='0.0.0.0', port=5001, debug=True)
-
