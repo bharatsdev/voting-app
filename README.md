@@ -17,12 +17,15 @@
     docker-compose up --force-recreate --build
     docker run  -p 5001:5001 flask-sample
     docker build -t flask-sample:latest .
+    docker-compose up --force-recreate --build --remove-orphan
+
     
     
 # TODO
 
-    1- Setu docker for all the app
+    1- Setup docker for all the app
     2- Setup docker compose for all apps 
     3- setup pods  for all services
     4- setup deployments and Service for apss
+    5- build  java app with docker 
 

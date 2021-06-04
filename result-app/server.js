@@ -13,6 +13,7 @@ const socketIO = require('socket.io')(http, {
 
 const port = process.env.port || 3001
 
+console.log(dbConfig)
 //DB connection
 const dbPool = new Pool(
     {
@@ -68,7 +69,7 @@ async.retry(
     }
 )
 getVotes=(client)=>{
-    client.query('SELECT id, COUNT(count) AS count FROM vote GROUP BY id', [], (error, results) => {
+    client.query('SELECT id, COUNT(count) AS count FROM votes GROUP BY id', [], (error, results) => {
         if (error) {
             console.error("Error performing query: " + err);
         }

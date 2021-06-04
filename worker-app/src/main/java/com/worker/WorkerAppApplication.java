@@ -26,6 +26,7 @@ public class WorkerAppApplication {
         RedisSerializationContext<String, Vote> serializationContext = RedisSerializationContext.<String, Vote>newSerializationContext(RedisSerializer.string())
                 .value(valueSerializer)
                 .build();
+
         return new ReactiveRedisTemplate<String, Vote>(lettuceConnectionFactory, serializationContext);
     }
 

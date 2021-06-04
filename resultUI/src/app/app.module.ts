@@ -15,7 +15,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3001', options: {} }
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SocketIoModule.forRoot(config), 
+    SocketIoModule.forRoot(config),
     FormsModule
   ],
   providers: [],
