@@ -1,11 +1,11 @@
 export class Vote {
 
-    category: string;
-    votecount: Number; 
+    id: Number;
+    count: Number; 
 
-    constructor(category: string, votecount: Number) {
-        this.category = category;
-        this.votecount = votecount; 
+    constructor(id: Number, count: Number) {
+        this.id = id;
+        this.count = count; 
     }
 
 }

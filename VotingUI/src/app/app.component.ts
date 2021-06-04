@@ -11,7 +11,7 @@ export class AppComponent implements OnInit {
   title = 'Vote UI';
   header = "Welcome to voting app..!"
 
-  vote: Vote = new Vote('Dog', 1);
+  vote: Vote = new Vote(1, 1);
 
   constructor(private rest: VoterRestService) { }
 
@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
 
   }
 
-  doVote(votestr: string): void {
+  doVote(votestr: Number): void {
     console.log("[INFO] : Do voting.....!")
     console.log(votestr)
     this.vote = new Vote(votestr, 1)
