@@ -29,12 +29,13 @@ public class VoteSubscribeService {
         this.reactiveRedisTemplate
                 .listenTo(ChannelTopic.of(this.topic))
                 .map(ReactiveSubscription.Message::getMessage)
-                .subscribe(vote1 -> {
-
-                    this.votingRepo.findById(vote1.getId()).map(this::setVoteCount)
-                            .ifPresent(this.votingRepo::save);
-
-                    this.votingRepo.findById(vote1.getId()).map(this.votingRepo::save);
+                .subscribe(vote -> {
+                    if (this.votingRepo.findById(vote.getId()).isPresent()) {
+                        this.votingRepo.findById(vote.getId()).map(this::setVoteCount)
+                                .ifPresent(this.votingRepo::save);
+                    } else {
+                        this.votingRepo.save(vote);
+                    }
                 });
     }
 
