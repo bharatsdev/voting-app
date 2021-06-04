@@ -21,8 +21,8 @@
     
 # TODO
 
-1- Setu docker for all the app
-2- Setup docker compose for all apps 
-3- setup pods  for all services
-4- setup deployments and Service for apss
+    1- Setu docker for all the app
+    2- Setup docker compose for all apps 
+    3- setup pods  for all services
+    4- setup deployments and Service for apss
 
