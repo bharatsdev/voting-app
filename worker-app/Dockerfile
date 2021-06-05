@@ -1,6 +1,7 @@
 FROM openjdk:8-jdk-alpine
+ARG  JAR_FILE=target/*.jar
 
 # Add the app jar
-ADD target/*.jar worker-app-1.0.jar
+COPY  ${JAR_FILE}   worker-app.jar
 
-ENTRYPOINT ["java","-jar","/worker-app-1.0.jar"]
+ENTRYPOINT ["java","-jar","/worker-app.jar"]

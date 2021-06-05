@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   redis:
-    image: redis:latest
+    image: redis:6-alpine
     ports:
       - "6379:6379"
 
@@ -41,7 +41,7 @@ services:
       - db
 
   db:
-    image: postgres:latest
+    image: postgres:13-alpine
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
