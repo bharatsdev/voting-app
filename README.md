@@ -23,9 +23,9 @@
     
 # TODO
 
-    1- Setup docker for all the app
-    2- Setup docker compose for all apps 
+    1- Setup docker for all the app - Done
+    2- Setup docker compose for all apps  - Done
     3- setup pods  for all services
     4- setup deployments and Service for apss
-    5- build  java app with docker 
+    5- build  java jar app with docker 
 

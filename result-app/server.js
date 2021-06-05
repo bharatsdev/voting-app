@@ -6,13 +6,12 @@ const dbConfig = require('./src/config/db.config.js')
 
 const socketIO = require('socket.io')(http, {
     cors: {
-        origins: ['http://localhost:4200']
+        origins: ['http://localhost:4200', 'http://resultui:4200']
     },
     transports: ['polling']
 })
 
 const port = process.env.port || 3001
-
 console.log(dbConfig)
 //DB connection
 const dbPool = new Pool(
@@ -24,19 +23,6 @@ const dbPool = new Pool(
         port: dbConfig.PORT
     }
 )
-
-// socketIO.on('connection', (socket) => {
-//     socket.on('new-vote', (response) => {
-//         dbPool.query('SELECT * FROM vote', (error, results) => {
-//             if (error) {
-//                 throw error
-//             }
-//             console.log(socket.conn.transport.name);
-//             console.log('Vote :: ' + results.rows)
-//             socket.emit('new-vote', results.rows[0].count);
-//         });
-//     });
-// });
 
 socketIO.on('error', function (err_msg) {
     console.info("Connection Error:" + err_msg);
@@ -68,19 +54,25 @@ async.retry(
 
     }
 )
-getVotes=(client)=>{
+getVotes = (client) => {
+//    console.log("[INFO] : get votes......" + port)
     client.query('SELECT id, COUNT(count) AS count FROM votes GROUP BY id', [], (error, results) => {
         if (error) {
             console.error("Error performing query: " + err);
         }
         //console.log(socket.conn.transport.name);
-        console.log('Vote :: ' + JSON.stringify( results.rows))
+//        console.log('Vote :: ' + JSON.stringify(results.rows))
         socketIO.emit('voting-scores', results.rows[0].count);
-
-        setTimeout(function() {getVotes(client) }, 1000);
+        setTimeout(function () { getVotes(client) }, 1000);
 
     });
 }
+
+app.get('/', function (req, res) {
+    console.log('[INFO] : ------ ' + JSON.stringify( req))
+    console.log('[INFO] : ------ ' + JSON.stringify( res))
+});
+
 http.listen(port, () => {
     console.log(`started on port: ${port}`);
 });

@@ -22,8 +22,8 @@ def index():
 def get_redis():
     if not hasattr(g, 'redis'):
         g.redis = redis.Redis(
-            host="127.0.0.1",
-            port="6379",
+            host="redis",
+            port=6379,
             password="",
             socket_timeout=5
         )
