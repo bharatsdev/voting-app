@@ -4,10 +4,10 @@
 
 
 
-    VOTE UI    : http://0.0.0.0:5001   - Angular
-    RESULT UI  : http://localhost:4200 - Angular 
+    VOTE UI    : http://loclhost:4200   - Angular
+    RESULT UI  : http://localhost:4201 - Angular 
     RESULT APP : http://localhost:3001 - Node JS
-    VOTING APP :                       - Python
+    VOTING APP :  http://loclhost:5001                     - Python
     WORKER APP :                       - Java
     POSTGRES   :                       - Docker with K8
     REDIS      :
