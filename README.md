@@ -29,3 +29,8 @@
     4- setup deployments and Service for apss
     5- build  java jar app with docker 
 
+
+## References
+
+    https://github.com/mmumshad/example-voting-app-kubernetes-v2
+    https://github.com/dockersamples
