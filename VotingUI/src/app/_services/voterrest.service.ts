@@ -8,7 +8,8 @@ import { catchError } from 'rxjs/operators';
 @Injectable({ providedIn: 'root' })
 export class VoterRestService {
 
-  votingUrl: string = "http://localhost:5001/vote";
+//   votingUrl: string = "http://localhost:5001/vote";
+  votingUrl: string = "http://127.0.0.1:63486//vote";
 
   httpOptions = {
     headers: new HttpHeaders({

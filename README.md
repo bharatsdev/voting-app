@@ -34,3 +34,21 @@
 
     https://github.com/mmumshad/example-voting-app-kubernetes-v2
     https://github.com/dockersamples
+    https://medium.com/swlh/how-to-run-locally-built-docker-images-in-kubernetes-b28fbc32cc1d
+
+
+### Commands for pulling the local docker image into kubernetes repository.
+
+        Check minikube Env details 
+            > minkube demon-evn
+        setup localrepo to minikube repo
+            > eval $(minikube docker-env)
+        build docker images again
+            > docker build . -t test:latest
+        delete pod
+            kubectl delete -f pod.yaml
+        recreate pod
+            kubectl create -f pod.yaml
+
+        minikube ssh
+        docke images 

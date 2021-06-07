@@ -6,90 +6,95 @@ services:
     image: redis:6-alpine
     ports:
       - "6379:6379"
-
-  voteapp:
-    build: ./vote-app
-    command: python app.py
-    volumes:
-      - ./vote-app:/app
-    ports:
-      - "5001:5001"
-    links:
-      - redis
-    depends_on:
-      - redis
-
+#
+#  voteapp:
+#    build: ./vote-app
+#    image: voteapp
+#    command: python app.py
+#    volumes:
+#      - ./vote-app:/app
+#    ports:
+#      - "5001:5001"
+#    links:
+#      - redis
+#    depends_on:
+#      - redis
+#
   voteui:
     build: ./votingUI
+    image: voteui
     ports:
       - "4200:4200"
     links:
       - redis
     depends_on:
       - redis
-      - voteapp
+#      - voteapp
 
-  workerapp:
-    build: ./worker-app
-    volumes:
-      - ./worker-app:/app
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db/votingdb
-      SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: postgres
-      SPRING_REDIS_HOST: redis
-      SPRING_REDIS_PORT: 6379
-    depends_on:
-      - redis
-      - voteapp
-      - voteui
-      - db
-    links:
-      - redis
-      - db
-
-  db:
-    image: postgres:13-alpine
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: votingdb
-    ports:
-      - "5432:5432"
-
-  resultapp:
-    build: ./result-app
-    command: node server.js
-    ports:
-      - "3001:3001"
-    volumes:
-      - ./result-app:/app
-    environment:
-      DB_SCHEMA: votingdb
-      DB_PASSWORD: postgres
-      DB_USER: postgres
-      DB_HOST: db
-    links:
-      - db
-    depends_on:
-      - redis
-      - voteapp
-      - voteui
-      - db
-      - workerapp
-
-  resultui:
-    build: ./resultUI
-    environment:
-      name: 'prod'
-    ports:
-      - "4201:4201"
-    links:
-      - resultapp
-    depends_on:
-      - redis
-      - voteapp
-      - voteui
-      - db
-      - workerapp
-      - resultapp
+#  workerapp:
+#    build: ./worker-app
+#    image: workerapp
+#    volumes:
+#      - ./worker-app:/app
+#    environment:
+#      SPRING_DATASOURCE_URL: jdbc:postgresql://db/votingdb
+#      SPRING_DATASOURCE_USERNAME: postgres
+#      SPRING_DATASOURCE_PASSWORD: postgres
+#      SPRING_REDIS_HOST: redis
+#      SPRING_REDIS_PORT: 6379
+#    depends_on:
+#      - redis
+#      - voteapp
+#      - voteui
+#      - db
+#    links:
+#      - redis
+#      - db
+#
+#  db:
+#    image: postgres:13-alpine
+#    environment:
+#      POSTGRES_USER: postgres
+#      POSTGRES_PASSWORD: postgres
+#      POSTGRES_DB: votingdb
+#    ports:
+#      - "5432:5432"
+#
+#  resultapp:
+#    build: ./result-app
+#    command: node server.js
+#    image: resultapp
+#    ports:
+#      - "3001:3001"
+#    volumes:
+#      - ./result-app:/app
+#    environment:
+#      DB_SCHEMA: votingdb
+#      DB_PASSWORD: postgres
+#      DB_USER: postgres
+#      DB_HOST: db
+#    links:
+#      - db
+#    depends_on:
+#      - redis
+#      - voteapp
+#      - voteui
+#      - db
+#      - workerapp
+#
+#  resultui:
+#    build: ./resultUI
+#    image: resultui
+#    environment:
+#      name: prod
+#    ports:
+#      - "4201:4201"
+#    links:
+#      - resultapp
+#    depends_on:
+#      - redis
+#      - voteapp
+#      - voteui
+#      - db
+#      - workerapp
+#      - resultapp

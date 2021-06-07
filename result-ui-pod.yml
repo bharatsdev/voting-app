@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: result-ui-pod
+  labels:
+    name: result-ui-pod
+    app: demo-voting-app
+spec:
+  containers:
+  - name: result-ui
+    image: voting-app-kubernetes_resultapp
+    ports:
+      - containerPort: 4201
