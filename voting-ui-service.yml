@@ -6,11 +6,12 @@ metadata:
     name: voiting-ui-service
     app: demo-voting-app
 spec:
-  type: NodePort
+  # type: NodePort
+  type: ClusterIP
   selector:
     name: voting-ui-pod
     app: demo-voting-app
   ports:
   - port: 4200
     targetPort: 4200
-    nodePort: 30007
+    # nodePort: 30007

@@ -8,4 +8,5 @@ metadata:
 spec:
   containers:
     - name: worker-app
-      image: voting-app-kubernetes_workerapp
+      image: workerapp
+      imagePullPolicy: IfNotPresent

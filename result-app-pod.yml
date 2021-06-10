@@ -8,6 +8,7 @@ metadata:
 spec:
   containers:
   - name: result-app
-    image: voting-app-kubernetes_resultapp
+    image: resultapp
+    imagePullPolicy: IfNotPresent
     ports:
       - containerPort: 3001
