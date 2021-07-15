@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgresdb
+spec:
+  selector:
+    matchLabels:
+      app: postgresdb
+  template:
+    metadata:
+      labels:
+        app: postgresdb
+    spec:
+      containers:
+        - name: postgresdb
+          image: postgres
+          ports:
+            - containerPort: 5432
+          envFrom:
+            - configMapRef:
+                name: vote-conf
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgresdb
+spec:
+  selector:
+    app: postgresdb
+  ports:
+    - port: 5432
+#      targetPort: 5432
+      protocol: TCP

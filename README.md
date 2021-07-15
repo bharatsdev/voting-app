@@ -21,7 +21,7 @@
 
     
     
-# TODO
+## TODO
 
     1- Setup docker for all the app - Done
     2- Setup docker compose for all apps  - Done
@@ -52,3 +52,6 @@
 
         minikube ssh
         docke images 
+
+        
+VoteUI=>VOTEAPP=>REDIS=>WORKER=>POSTGRES=>RESULTAPP=>RESULTUI
