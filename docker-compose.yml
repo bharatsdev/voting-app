@@ -1,45 +1,6 @@
-version: "3.7"
+version: "3.9"
 
 services:
-  redis:
-    image: redis:latest
-    ports:
-      - "6379:6379"
-
-  voteapp:
-    build: ./vote-app
-    command: python app.py
-    volumes:
-      - ./vote-app:/app
-    ports:
-      - "5001:5001"
-    depends_on:
-      - redis
-
-  voteui:
-    build: ./votingUI
-    ports:
-      - "4200:4200"
-    depends_on:
-      - redis
-      - voteapp
-
-  workerapp:
-    build: ./worker-app
-    volumes:
-      - ./worker-app:/app
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db/votingdb
-      SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: postgres
-      SPRING_REDIS_HOST: redis
-      SPRING_REDIS_PORT: 6379
-    depends_on:
-      - redis
-      - voteapp
-      - voteui
-      - db
-
   db:
     image: postgres:latest
     environment:
@@ -49,7 +10,30 @@ services:
     ports:
       - "5432:5432"
 
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    depends_on:
+      - "db"
+
+  workerapp:
+    image: workerapp
+    build: worker
+    volumes:
+      - ./worker-app:/app
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db/votingdb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      SPRING_REDIS_HOST: redis
+      SPRING_REDIS_PORT: 6379
+    depends_on:
+      - "redis"
+      - "db"
+
   resultapp:
+    image: resultapp
     build: ./result-app
     command: node server.js
     ports:
@@ -62,22 +46,38 @@ services:
       DB_USER: postgres
       DB_HOST: db
     depends_on:
-      - redis
-      - voteapp
-      - voteui
-      - db
-      - workerapp
+      - "workerapp"
+      - "db"
+
+  voteapp:
+    image: voteapp
+    build: ./vote-app
+    command: python app.py
+    volumes:
+      - ./vote-app:/app
+    ports:
+      - "5001:5001"
+    depends_on:
+      - "redis"
+      - "workerapp"
+      - "db"
+
+  voteui:
+    image: voteui
+    build: ./votingUI
+    container_name: voteui
+    ports:
+      - "4200:4200"
+    depends_on:
+      - "redis"
+      - "voteapp"
 
   resultui:
+    image: resultui
     build: ./resultUI
     environment:
       name: 'prod'
     ports:
       - "4201:4201"
     depends_on:
-      - redis
-      - voteapp
-      - voteui
-      - db
-      - workerapp
-      - resultapp
+      - "resultapp"

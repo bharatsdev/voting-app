@@ -1,7 +1,7 @@
 package com.worker.subscribe;
 
 import com.worker.entity.Vote;
-import com.worker.repos.VotingRepo;
+import com.worker.repo.VotingRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.connection.ReactiveSubscription;
@@ -31,8 +31,7 @@ public class VoteSubscribeService {
                 .map(ReactiveSubscription.Message::getMessage)
                 .subscribe(vote -> {
                     if (this.votingRepo.findById(vote.getId()).isPresent()) {
-                        this.votingRepo.findById(vote.getId()).map(this::setVoteCount)
-                                .ifPresent(this.votingRepo::save);
+                        this.votingRepo.findById(vote.getId()).map(this::setVoteCount).ifPresent(this.votingRepo::save);
                     } else {
                         this.votingRepo.save(vote);
                     }

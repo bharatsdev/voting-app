@@ -1,4 +1,4 @@
-FROM    node:14
+FROM  node:14-alpine
 
 # set working directory
 WORKDIR /app
@@ -17,4 +17,5 @@ RUN npm install -g @angular/cli
 COPY . /app
 
 # start app
-CMD ng serve --host 0.0.0.0
+CMD ng serve --host 0.0.0.0  --port 4200
+

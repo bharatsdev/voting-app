@@ -61,8 +61,8 @@ getVotes = (client) => {
             console.error("Error performing query: " + err);
         }
         //console.log(socket.conn.transport.name);
-//        console.log('Vote :: ' + JSON.stringify(results.rows))
-        socketIO.emit('voting-scores', results.rows[0].count);
+        console.log('Vote <::> ' + JSON.stringify(results.rows))
+        socketIO.emit('voting-scores', results.rows[0]);
         setTimeout(function () { getVotes(client) }, 1000);
 
     });
