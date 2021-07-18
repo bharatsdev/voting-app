@@ -1,4 +1,9 @@
 # Voting-App-Kubernetes
+       1- Kubernetes setup
+       2- Kubernetes Deployment/Pod creation
+       3- Kubernetes Service Creation
+       4- Deplyment on Kubernetes
+       5- Helm Chart
 
 ## Voting Service
 
