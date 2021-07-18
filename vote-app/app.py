@@ -1,6 +1,6 @@
 import json
 import socket
-
+import os
 import flask
 import redis
 from flask import request, g, render_template
@@ -22,7 +22,7 @@ def index():
 def get_redis():
     if not hasattr(g, 'redis'):
         g.redis = redis.Redis(
-            host="${REDIS_HOST:redis}",
+            host=os.environ.get('REDIS_HOST'),
             port=6379,
             password="",
             socket_timeout=5
