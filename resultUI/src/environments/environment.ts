@@ -2,10 +2,14 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+
+
 export const environment = {
   production: false,
-  SOCKET_URL: 'http://resutlapp:3001'
+ SOCKET_URL:  "192.168.64.3",
+  SOCKET_PORT: "30012",
 };
+
 
 /*
  * For easier debugging in development mode, you can import the following file
