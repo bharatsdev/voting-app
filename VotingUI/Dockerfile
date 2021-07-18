@@ -1,4 +1,4 @@
-FROM  node:14-alpine
+FROM  node:14-alpine as builder
 
 # set working directory
 WORKDIR /app
@@ -18,4 +18,3 @@ COPY . /app
 
 # start app
 CMD ng serve --host 0.0.0.0  --port 4200
-

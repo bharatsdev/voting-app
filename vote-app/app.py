@@ -14,7 +14,7 @@ hostname = socket.gethostname()
 redis_topic = "vote-channel"
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/app', methods=['GET', 'POST'])
 def index():
     return "Welcome to voting app....!"
 

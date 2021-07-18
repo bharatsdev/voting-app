@@ -41,14 +41,3 @@ spec:
                 configMapKeyRef:
                   name: vote-conf
                   key: REDIS_HOST
-
-
-
-#---
-#apiVersion: v1
-#kind: Secret
-#metadata:
-#  name: postgres-credentials
-#data:
-#  postgres_user: cG9zdGdyZXM=
-#  postgres_password: cG9zdGdyZXM=

@@ -15,10 +15,6 @@ spec:
         - name: vote
           image: voteapp
           imagePullPolicy: IfNotPresent
-          # resources:
-          #   limits:
-          #     memory: "128Mi"
-          #     cpu: "500m"
           ports:
             - containerPort: 5001
           env:
@@ -28,15 +24,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: vote
+  name: votews
 spec:
-  # type: NodePort
+  type: NodePort
   selector:
     app: vote
   ports:
     - port: 5001
-#      targetPort: 5001
-      # nodePort: 30010
-      protocol: TCP
-
-
+      targetPort: 5001
+      nodePort: 30012

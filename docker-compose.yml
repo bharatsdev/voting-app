@@ -9,7 +9,6 @@ services:
       POSTGRES_DB: votingdb
     ports:
       - "5432:5432"
-
   redis:
     image: redis:latest
     ports:
@@ -31,7 +30,6 @@ services:
     depends_on:
       - "redis"
       - "db"
-
   resultapp:
     image: resultapp
     build: ./result-app
@@ -48,7 +46,6 @@ services:
     depends_on:
       - "workerapp"
       - "db"
-
   voteapp:
     image: voteapp
     build: ./vote-app
@@ -61,7 +58,6 @@ services:
       - "redis"
       - "workerapp"
       - "db"
-
   voteui:
     image: voteui
     build: ./votingUI
@@ -71,7 +67,6 @@ services:
     depends_on:
       - "redis"
       - "voteapp"
-
   resultui:
     image: resultui
     build: ./resultUI

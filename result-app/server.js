@@ -69,8 +69,8 @@ getVotes = (client) => {
 }
 
 app.get('/', function (req, res) {
-    console.log('[INFO] : ------ ' + JSON.stringify( req))
-    console.log('[INFO] : ------ ' + JSON.stringify( res))
+    console.log('[INFO] : ------ ' )
+    console.log('[INFO] : ------ ' )
 });
 
 http.listen(port, () => {

@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+ VOTE_HOST:  "192.168.64.3",
+  VOTE_PROT: "30012",
+
 };
 
 /*

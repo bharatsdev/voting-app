@@ -26,7 +26,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: resultui-service
+  name: resultui
 spec:
   type: NodePort
   selector:
@@ -35,6 +35,5 @@ spec:
     - port:  4201
       targetPort: 4201
       nodePort: 30008
-      protocol: TCP
 
 

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vote-conf
+data:
+  DB_HOST: postgresdb
+  POSTGRES_DB: votingdb
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: postgres
+  VOTE_HOST: "192.168.64.3"
+  VOTE_PORT: "30012"
+  RESULT_HOST: "192.168.64.3"
+  RESULT_PORT: "30163"
+  REDIS_HOST: redis
