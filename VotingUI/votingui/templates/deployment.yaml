@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name}}
+  labels:
+    {{- include "votingui.labels" . | nindent 4}}
+spec:
+  replicas: {{ .Values.replicaCount}}
+  selector:
+    matchLabels:
+      {{- include "votingui.selectorLabels" . | nindent 6}}
+  template:
+    metadata:
+      labels:
+              {{- include "votingui.selectorLabels" . | nindent 8}}
+    spec:
+      containers:
+        - name: {{ .Values.containers.name}}
+          image: {{ .Values.image.repository}}
+          imagePullPolicy: {{ .Values.image.pullPolicy}}
+          ports:
+            - containerPort: {{ .Values.service.port}}
+          env:
+            - name: VOTEAPP_URL
+              value: voteapp
+            - name: VOTE_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: vote-conf
+                  key: VOTE_HOST
+            - name: VOTE_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: vote-conf
+                  key: VOTE_PORT

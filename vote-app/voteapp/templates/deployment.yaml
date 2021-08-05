@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name}}
+  labels:
+    {{- include "voteapp.labels" . | nindent 4}}
+spec:
+  selector:
+    matchLabels:
+     {{- include "voteapp.selectorLabels" . | nindent 6}}
+  template:
+    metadata:
+      labels:
+        {{- include "voteapp.selectorLabels" . | nindent 8}}
+    spec:
+      containers:
+        - name: {{ .Values.containers.name}}
+          image: {{ .Values.image.repository}}
+          imagePullPolicy:  {{ .Values.image.pullPolicy}}
+          ports:
+            - containerPort: {{ .Values.service.targetPort}}
+          env:
+            - name: REDIS_HOST
+              value: redis

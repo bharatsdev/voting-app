@@ -1,0 +1,14 @@
+replicaCount: 1
+image:
+  repository: voteui
+  pullPolicy: IfNotPresent
+service:
+  type: NodePort
+  name: voteui
+  port: 4200
+  targetPort: 4200
+  nodePort: 30002
+containers:
+  name: voteui
+
+

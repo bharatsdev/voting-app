@@ -49,7 +49,7 @@
             kubectl delete -f pod.yaml
         recreate pod
             kubectl create -f pod.yaml
-
+        kubectl apply  -f k8s/
         minikube ssh
         docke images 
 

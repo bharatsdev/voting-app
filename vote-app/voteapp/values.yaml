@@ -1,0 +1,15 @@
+replicaCount: 1
+
+image:
+  repository: voteapp
+  pullPolicy: IfNotPresent
+ 
+service:
+  name: votews
+  type: NodePort
+  port: 5001
+  targetPort: 5001
+  nodePort: 30012
+containers:
+  name: vote
+
